@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://druedaodonto-g6wceman.manus.space/sitemap.xml
