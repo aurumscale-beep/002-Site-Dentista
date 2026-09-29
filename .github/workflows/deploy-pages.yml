@@ -20,14 +20,43 @@ jobs:
     steps:
       - name: Baixar código
         uses: actions/checkout@v4
+
       - name: Configurar Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Enviar site estático
+
+      - name: Preparar site estático
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          for path in assets manus-storage __manus__ index.html CNAME robots.txt sitemap.xml .nojekyll; do
+            cp -R "$path" "_site/$path"
+          done
+          while IFS= read -r route; do
+            [ -n "$route" ] || continue
+            mkdir -p "_site/$route"
+            cp _site/index.html "_site/$route/index.html"
+          done < <(
+            sed -n 's#.*uedaodontologia\\.com\\.br/\\([^<]*\\)</loc>.*#\\1#p' sitemap.xml \\
+              | sed 's#/$##' \\
+              | grep -v '^$'
+          )
+
+      - name: Verificar rotas
+        run: |
+          test -f _site/implantes/index.html
+          test -f _site/clinica-geral/index.html
+          test -f _site/endodontia/index.html
+          test -f _site/ortodontia/index.html
+          test -f _site/proteses/index.html
+          test ! -e _site/404.html
+
+      - name: Enviar artefato do site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
   deploy:
     needs: build
