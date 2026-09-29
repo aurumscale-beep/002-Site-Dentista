@@ -37,3 +37,9 @@
 /manus-storage/ueda-restauracoes_c3f7d939.jpg
 /manus-storage/ueda-symbol-compact_8c5146ae.png
 /manus-storage/whatsapp-glyph-white_1ae0f7c8.png
+/manus-storage/protese-fixa_2eb1330e.webp
+/manus-storage/protese-flexivel_63b2e613.webp
+/manus-storage/protese-parcial-removivel_ff6936a7.webp
+/manus-storage/protese-protocolo_8839d7f3.webp
+/manus-storage/protese-sobre-implantes_adf2641f.webp
+/manus-storage/protese-total_a47061ee.webp
